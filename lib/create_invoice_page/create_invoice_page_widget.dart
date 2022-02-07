@@ -695,7 +695,7 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                             controller: textController8,
                                             obscureText: false,
                                             decoration: InputDecoration(
-                                              labelText: 'Service Cost 4',
+                                              labelText: 'Service Cost 4 Test',
                                               enabledBorder:
                                                   UnderlineInputBorder(
                                                 borderSide: BorderSide(
