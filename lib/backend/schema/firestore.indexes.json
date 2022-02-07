@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "Invoices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "profileUID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}
