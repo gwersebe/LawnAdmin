@@ -373,13 +373,6 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                               color: Color(0xFF8B97A2),
                                               fontWeight: FontWeight.w500,
                                             ),
-                                            validator: (val) {
-                                              if (val.isEmpty) {
-                                                return 'Field is required';
-                                              }
-
-                                              return null;
-                                            },
                                           ),
                                         ),
                                       ),
