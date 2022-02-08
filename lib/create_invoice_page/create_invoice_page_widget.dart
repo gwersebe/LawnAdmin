@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateInvoicePageWidget extends StatefulWidget {
@@ -23,6 +24,7 @@ class CreateInvoicePageWidget extends StatefulWidget {
 }
 
 class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
+  DateTime datePicked;
   String choiceChipsValue;
   TextEditingController textController1;
   TextEditingController textController2;
@@ -746,12 +748,20 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                       if (!formKey.currentState.validate()) {
                                         return;
                                       }
+                                      await DatePicker.showDateTimePicker(
+                                        context,
+                                        showTitleActions: true,
+                                        onConfirm: (date) {
+                                          setState(() => datePicked = date);
+                                        },
+                                        currentTime: getCurrentTimestamp,
+                                      );
                                       final invoicesCreateData =
                                           createInvoicesRecordData(
                                         profileUID: widget.profile.uid,
                                         fullName:
                                             '${widget.profile.firstName} ${widget.profile.lastName}',
-                                        createdTime: getCurrentTimestamp,
+                                        createdTime: datePicked,
                                         serviceName1: textController1.text,
                                         serviceName2: textController3.text,
                                         serviceName3: textController5.text,

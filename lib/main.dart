@@ -125,10 +125,10 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.attach_money_outlined,
+              Icons.event,
               size: 24,
             ),
-            label: 'Invoices',
+            label: 'Activity',
             tooltip: '',
           ),
           BottomNavigationBarItem(
