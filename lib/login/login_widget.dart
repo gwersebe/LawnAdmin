@@ -73,9 +73,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                       child: Column(
                         children: [
                           TabBar(
-                            labelColor: FlutterFlowTheme.primaryColor,
-                            labelStyle: FlutterFlowTheme.bodyText1,
-                            indicatorColor: FlutterFlowTheme.secondaryColor,
+                            labelColor:
+                                FlutterFlowTheme.of(context).primaryColor,
+                            labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                            indicatorColor:
+                                FlutterFlowTheme.of(context).secondaryColor,
                             tabs: [
                               Tab(
                                 text: 'Employee Login',

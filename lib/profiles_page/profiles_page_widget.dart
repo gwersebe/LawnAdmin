@@ -31,7 +31,7 @@ class _ProfilesPageWidgetState extends State<ProfilesPageWidget> {
               width: 50,
               height: 50,
               child: CircularProgressIndicator(
-                color: FlutterFlowTheme.primaryColor,
+                color: FlutterFlowTheme.of(context).primaryColor,
               ),
             ),
           );
@@ -53,10 +53,11 @@ class _ProfilesPageWidgetState extends State<ProfilesPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                         child: Text(
                           'Profiles',
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            fontSize: 30,
-                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    fontSize: 30,
+                                  ),
                         ),
                       ),
                       Container(
@@ -92,6 +93,10 @@ class _ProfilesPageWidgetState extends State<ProfilesPageWidget> {
                     ],
                   ),
                 ),
+                Divider(
+                  thickness: 1,
+                  color: Color(0xE9000000),
+                ),
                 Expanded(
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -110,7 +115,8 @@ class _ProfilesPageWidgetState extends State<ProfilesPageWidget> {
                                   width: 50,
                                   height: 50,
                                   child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.primaryColor,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                   ),
                                 ),
                               );
@@ -127,61 +133,67 @@ class _ProfilesPageWidgetState extends State<ProfilesPageWidget> {
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 10),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.95,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFBCD9B1),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 5,
-                                          color: Color(0x39000000),
-                                          offset: Offset(0, 2),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(25),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    elevation: 8,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProfilePageWidget(
-                                              pREF: columnProfilesRecord
-                                                  .reference,
-                                              prof: columnProfilesRecord,
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.95,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFF80B641),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color(0x39000000),
+                                          )
+                                        ],
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfilePageWidget(
+                                                pREF: columnProfilesRecord
+                                                    .reference,
+                                                prof: columnProfilesRecord,
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      },
-                                      child: ListTile(
-                                        leading: Icon(
-                                          Icons.person,
-                                          color: Color(0xE9000000),
-                                        ),
-                                        title: Text(
-                                          '${columnProfilesRecord.firstName} ${columnProfilesRecord.lastName}',
-                                          style:
-                                              FlutterFlowTheme.title3.override(
-                                            fontFamily: 'Lexend Deca',
+                                          );
+                                        },
+                                        child: ListTile(
+                                          leading: Icon(
+                                            Icons.person,
                                             color: Color(0xE9000000),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.normal,
                                           ),
-                                        ),
-                                        trailing: Icon(
-                                          Icons.arrow_forward_ios,
-                                          color: Color(0xFF303030),
-                                          size: 20,
-                                        ),
-                                        dense: false,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                10, 0, 10, 0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                          title: Text(
+                                            '${columnProfilesRecord.firstName} ${columnProfilesRecord.lastName}',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xE9000000),
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                          trailing: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Color(0xFF303030),
+                                            size: 20,
+                                          ),
+                                          dense: false,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10, 0, 10, 0),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
                                         ),
                                       ),
                                     ),
