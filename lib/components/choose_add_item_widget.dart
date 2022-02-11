@@ -32,11 +32,11 @@ class _ChooseAddItemWidgetState extends State<ChooseAddItemWidget> {
             options: FFButtonOptions(
               width: 130,
               height: 40,
-              color: FlutterFlowTheme.primaryColor,
-              textStyle: FlutterFlowTheme.subtitle2.override(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-              ),
+              color: FlutterFlowTheme.of(context).primaryColor,
+              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                    fontFamily: 'Poppins',
+                    color: Colors.white,
+                  ),
               borderSide: BorderSide(
                 color: Colors.transparent,
                 width: 1,
@@ -53,11 +53,11 @@ class _ChooseAddItemWidgetState extends State<ChooseAddItemWidget> {
             options: FFButtonOptions(
               width: 130,
               height: 40,
-              color: FlutterFlowTheme.primaryColor,
-              textStyle: FlutterFlowTheme.subtitle2.override(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-              ),
+              color: FlutterFlowTheme.of(context).primaryColor,
+              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                    fontFamily: 'Poppins',
+                    color: Colors.white,
+                  ),
               borderSide: BorderSide(
                 color: Colors.transparent,
                 width: 1,

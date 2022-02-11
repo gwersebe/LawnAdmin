@@ -40,7 +40,7 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
               width: 50,
               height: 50,
               child: CircularProgressIndicator(
-                color: FlutterFlowTheme.primaryColor,
+                color: FlutterFlowTheme.of(context).primaryColor,
               ),
             ),
           );
@@ -119,11 +119,12 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                       children: [
                         Text(
                           'Profile Details',
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF0D1724),
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xFF0D1724),
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                       ],
                     ),
@@ -151,21 +152,24 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                     child: Text(
                                       'First Name',
                                       textAlign: TextAlign.start,
-                                      style:
-                                          FlutterFlowTheme.bodyText2.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xFF040404),
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Color(0xFF040404),
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                     ),
                                   ),
                                   Align(
                                     alignment: AlignmentDirectional(-0.9, 0),
                                     child: Text(
                                       viewInvoicePageProfilesRecord.firstName,
-                                      style: FlutterFlowTheme.title3.override(
-                                        fontFamily: 'Lexend Deca',
-                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .title3
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                          ),
                                     ),
                                   ),
                                 ],
@@ -205,23 +209,25 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         'Last Name',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF040404),
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
                                     ),
                                     Align(
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         viewInvoicePageProfilesRecord.lastName,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -262,23 +268,25 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         'Email',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF040404),
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
                                     ),
                                     Align(
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         viewInvoicePageProfilesRecord.email,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -319,12 +327,13 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         'Phone Number',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF040404),
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
                                     ),
                                     Align(
@@ -332,11 +341,12 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       child: Text(
                                         viewInvoicePageProfilesRecord
                                             .phoneNumber,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -377,23 +387,25 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         'Secondary Phone',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF040404),
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
                                     ),
                                     Align(
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         viewInvoicePageProfilesRecord.phone2,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -434,12 +446,13 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         'Property Address 1',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF040404),
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
                                     ),
                                     Align(
@@ -447,11 +460,12 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       child: Text(
                                         viewInvoicePageProfilesRecord
                                             .propertyAddress1,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -492,12 +506,13 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         'Property Address 2',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF040404),
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
                                     ),
                                     Align(
@@ -505,11 +520,12 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       child: Text(
                                         viewInvoicePageProfilesRecord
                                             .propertyAddress2,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -550,12 +566,13 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       alignment: AlignmentDirectional(-0.9, 0),
                                       child: Text(
                                         'Property Address 3',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF424242),
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF424242),
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                       ),
                                     ),
                                     Align(
@@ -563,11 +580,12 @@ class _ViewInvoicePageWidgetState extends State<ViewInvoicePageWidget> {
                                       child: Text(
                                         viewInvoicePageProfilesRecord
                                             .propertyAddress3,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],

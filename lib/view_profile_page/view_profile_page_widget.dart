@@ -40,7 +40,7 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
               width: 50,
               height: 50,
               child: CircularProgressIndicator(
-                color: FlutterFlowTheme.primaryColor,
+                color: FlutterFlowTheme.of(context).primaryColor,
               ),
             ),
           );
@@ -73,6 +73,13 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                 Navigator.pop(context);
               },
             ),
+            title: Text(
+              'Profile Details',
+              style: FlutterFlowTheme.of(context).bodyText1.override(
+                    fontFamily: 'Lexend Deca',
+                    fontSize: 18,
+                  ),
+            ),
             actions: [
               FlutterFlowIconButton(
                 borderColor: Colors.transparent,
@@ -103,7 +110,7 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
             centerTitle: true,
             elevation: 4,
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xFFF5F5F5),
           body: SafeArea(
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -113,16 +120,65 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text(
-                          'Profile Details',
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Montserrat',
-                            color: Color(0xFF0D1724),
-                            fontWeight: FontWeight.w500,
+                        Expanded(
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Container(
+                              width: 330,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(-0.9, 0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-0.9, 0),
+                                        child: Text(
+                                          'First Name',
+                                          textAlign: TextAlign.start,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color: Color(0xFF040404),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-0.9, 0),
+                                        child: Text(
+                                          viewProfilePageProfilesRecord
+                                              .firstName,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -139,92 +195,132 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                             height: 60,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(-0.9, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Align(
-                                    alignment: AlignmentDirectional(-0.9, 0),
-                                    child: Text(
-                                      'First Name',
-                                      textAlign: TextAlign.start,
-                                      style:
-                                          FlutterFlowTheme.bodyText2.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xFF040404),
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                            child: Material(
+                              color: Colors.transparent,
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
+                                width: 330,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(-0.9, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            'Last Name',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF040404),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            viewProfilePageProfilesRecord
+                                                .lastName,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(-0.9, 0),
-                                    child: Text(
-                                      viewProfilePageProfilesRecord.firstName,
-                                      style: FlutterFlowTheme.title3.override(
-                                        fontFamily: 'Lexend Deca',
-                                      ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Container(
+                              width: 330,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
+                                width: 330,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(-0.9, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            'Email',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF040404),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            viewProfilePageProfilesRecord.email,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Container(
-                              width: 330,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-0.9, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Last Name',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        viewProfilePageProfilesRecord.lastName,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ),
                             ),
@@ -244,44 +340,60 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                             height: 60,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Container(
-                              width: 330,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
+                            child: Material(
+                              color: Colors.transparent,
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-0.9, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Email',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
+                              child: Container(
+                                width: 330,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(-0.9, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            'Phone Number',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF040404),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        viewProfilePageProfilesRecord.email,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            viewProfilePageProfilesRecord
+                                                .phoneNumber,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20,
+                                                ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -296,50 +408,65 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: Container(
                               width: 330,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-0.9, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Phone Number',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
+                              child: Container(
+                                width: 330,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(-0.9, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            'Secondary Phone',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF040404),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        viewProfilePageProfilesRecord
-                                            .phoneNumber,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            viewProfilePageProfilesRecord
+                                                .phone2,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20,
+                                                ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -354,49 +481,65 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: Container(
                               width: 330,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-0.9, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Secondary Phone',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
+                              child: Container(
+                                width: 330,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(-0.9, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            'Property Address 1',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF040404),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        viewProfilePageProfilesRecord.phone2,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            viewProfilePageProfilesRecord
+                                                .propertyAddress1,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20,
+                                                ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -411,50 +554,65 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: Container(
                               width: 330,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-0.9, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Property Address 1',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
+                              child: Container(
+                                width: 330,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Align(
+                                  alignment: AlignmentDirectional(-0.9, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            'Property Address 2',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF040404),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        viewProfilePageProfilesRecord
-                                            .propertyAddress1,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            viewProfilePageProfilesRecord
+                                                .propertyAddress2,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20,
+                                                ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -469,108 +627,65 @@ class _ViewProfilePageWidgetState extends State<ViewProfilePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: Container(
                               width: 330,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-0.9, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Property Address 2',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF040404),
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        viewProfilePageProfilesRecord
-                                            .propertyAddress2,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                              child: Container(
+                                width: 330,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Container(
-                              width: 330,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Align(
-                                alignment: AlignmentDirectional(-0.9, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Property Address 3',
-                                        style:
-                                            FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF424242),
-                                          fontWeight: FontWeight.w500,
+                                child: Align(
+                                  alignment: AlignmentDirectional(-0.9, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            'Property Address 3',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF424242),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        viewProfilePageProfilesRecord
-                                            .propertyAddress3,
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 20,
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.9, 0),
+                                          child: Text(
+                                            viewProfilePageProfilesRecord
+                                                .propertyAddress3,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20,
+                                                ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),

@@ -42,7 +42,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
               width: 50,
               height: 50,
               child: CircularProgressIndicator(
-                color: FlutterFlowTheme.primaryColor,
+                color: FlutterFlowTheme.of(context).primaryColor,
               ),
             ),
           );
@@ -59,7 +59,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: Color(0xFFF5F5F5),
+            backgroundColor: Color(0xFF1D5796),
             automaticallyImplyLeading: true,
             leading: FlutterFlowIconButton(
               borderColor: Colors.transparent,
@@ -86,21 +86,23 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                       children: [
                         Text(
                           profilePageProfilesRecord.firstName,
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            fontSize: 20,
-                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    fontSize: 20,
+                                  ),
                         ),
                         Text(
                           ' ',
-                          style: FlutterFlowTheme.bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                         Text(
                           profilePageProfilesRecord.lastName,
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            fontSize: 20,
-                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    fontSize: 20,
+                                  ),
                         ),
                       ],
                     ),
@@ -110,9 +112,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                   alignment: AlignmentDirectional(-1, 0),
                   child: Text(
                     profilePageProfilesRecord.propertyAddress1,
-                    style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Lexend Deca',
-                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Lexend Deca',
+                        ),
                   ),
                 ),
               ],
@@ -129,104 +131,115 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.92,
-                    height: MediaQuery.of(context).size.height * 0.14,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFB5D7A9),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 10,
-                          color: Color(0x4B1A1F24),
-                          offset: Offset(0, 3),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(25),
+                  child: Material(
+                    color: Colors.transparent,
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Align(
-                          alignment: AlignmentDirectional(-0.3, 0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.46,
-                            height: MediaQuery.of(context).size.height * 1,
-                            decoration: BoxDecoration(),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 20, 0, 0),
-                                  child: Text(
-                                    'Total Invoices',
-                                    textAlign: TextAlign.start,
-                                    style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Color(0xE9000000),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.92,
+                      height: MediaQuery.of(context).size.height * 0.14,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF76BC36),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x4B1A1F24),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-0.3, 0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.46,
+                              height: MediaQuery.of(context).size.height * 1,
+                              decoration: BoxDecoration(),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 20, 0, 0),
+                                    child: Text(
+                                      'Total Invoices',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Color(0xE9000000),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 8, 20, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      StreamBuilder<List<InvoicesRecord>>(
-                                        stream: queryInvoicesRecord(
-                                          queryBuilder: (invoicesRecord) =>
-                                              invoicesRecord.where('profileUID',
-                                                  isEqualTo: widget.prof.uid),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: FlutterFlowTheme
-                                                      .primaryColor,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 8, 20, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        StreamBuilder<List<InvoicesRecord>>(
+                                          stream: queryInvoicesRecord(
+                                            queryBuilder: (invoicesRecord) =>
+                                                invoicesRecord.where(
+                                                    'profileUID',
+                                                    isEqualTo: widget.prof.uid),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                  ),
                                                 ),
-                                              ),
+                                              );
+                                            }
+                                            List<InvoicesRecord>
+                                                textInvoicesRecordList =
+                                                snapshot.data;
+                                            return Text(
+                                              textInvoicesRecordList.length
+                                                  .toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 32,
+                                                      ),
                                             );
-                                          }
-                                          List<InvoicesRecord>
-                                              textInvoicesRecordList =
-                                              snapshot.data;
-                                          return Text(
-                                            textInvoicesRecordList.length
-                                                .toString(),
-                                            style: FlutterFlowTheme.title1
-                                                .override(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 32,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ],
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(-0.3, 0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.46,
-                            height: MediaQuery.of(context).size.height * 1,
-                            decoration: BoxDecoration(),
+                          Align(
+                            alignment: AlignmentDirectional(-0.3, 0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.46,
+                              height: MediaQuery.of(context).size.height * 1,
+                              decoration: BoxDecoration(),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -265,12 +278,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               children: [
                                 Text(
                                   'Quick Service',
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF090F13),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Color(0xFF090F13),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                      ),
                                 ),
                               ],
                             ),
@@ -288,15 +303,16 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.13,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Color(0xFF26313B),
                                     boxShadow: [
                                       BoxShadow(
-                                        blurRadius: 5,
+                                        blurRadius: 10,
                                         color: Color(0x3B000000),
                                         offset: Offset(0, 2),
+                                        spreadRadius: 5,
                                       )
                                     ],
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -317,13 +333,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                   0, 8, 0, 0),
                                           child: Text(
                                             'Phone',
-                                            style: FlutterFlowTheme.bodyText1
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
                                                 .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFF090F13),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF090F13),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
                                           ),
                                         ),
                                       ],
@@ -336,15 +353,16 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.13,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Color(0xFFFFFFFE),
                                     boxShadow: [
                                       BoxShadow(
-                                        blurRadius: 5,
+                                        blurRadius: 10,
                                         color: Color(0x3A000000),
                                         offset: Offset(0, 2),
+                                        spreadRadius: 5,
                                       )
                                     ],
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -365,13 +383,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                   0, 8, 0, 0),
                                           child: Text(
                                             'Email',
-                                            style: FlutterFlowTheme.bodyText1
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
                                                 .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFF090F13),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF090F13),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
                                           ),
                                         ),
                                       ],
@@ -392,12 +411,13 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                       color: Colors.white,
                                       boxShadow: [
                                         BoxShadow(
-                                          blurRadius: 5,
+                                          blurRadius: 10,
                                           color: Color(0x39000000),
                                           offset: Offset(0, 2),
+                                          spreadRadius: 5,
                                         )
                                       ],
-                                      borderRadius: BorderRadius.circular(25),
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -418,13 +438,16 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     0, 8, 0, 0),
                                             child: Text(
                                               'Location',
-                                              style: FlutterFlowTheme.bodyText1
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
                                                   .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Color(0xFF090F13),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.normal,
-                                              ),
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF090F13),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
                                             ),
                                           ),
                                         ],
@@ -443,12 +466,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               children: [
                                 Text(
                                   'Details',
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF090F13),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Color(0xFF090F13),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                      ),
                                 ),
                               ],
                             ),
@@ -459,58 +484,67 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.95,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFBCD9B1),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        color: Color(0x39000000),
-                                        offset: Offset(0, 2),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(25),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ViewProfilePageWidget(
-                                            profileRecord: widget.prof,
-                                            profileReference: widget.pREF,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.95,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF80B641),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0x39000000),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ViewProfilePageWidget(
+                                              profileRecord: widget.prof,
+                                              profileReference: widget.pREF,
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                    child: ListTile(
-                                      leading: Icon(
-                                        Icons.person,
-                                        color: Color(0xE9000000),
-                                      ),
-                                      title: Text(
-                                        'Personal Information',
-                                        style: FlutterFlowTheme.title3.override(
-                                          fontFamily: 'Lexend Deca',
+                                        );
+                                      },
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.person,
                                           color: Color(0xE9000000),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal,
                                         ),
-                                      ),
-                                      trailing: Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: Color(0xFF303030),
-                                        size: 20,
-                                      ),
-                                      dense: false,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              10, 0, 10, 0),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25),
+                                        title: Text(
+                                          'Personal Information',
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color: Color(0xE9000000),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                        trailing: Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: Color(0xFF303030),
+                                          size: 20,
+                                        ),
+                                        dense: false,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                10, 0, 10, 0),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -519,45 +553,178 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.95,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFBCD9B1),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        color: Color(0x39000000),
-                                        offset: Offset(0, 2),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(25),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProfileinvoicesPageWidget(
-                                            uid: widget.prof,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.95,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF80B641),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0x39000000),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Color(0xFF80B641),
+                                      ),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProfileinvoicesPageWidget(
+                                              uid: widget.prof,
+                                            ),
                                           ),
+                                        );
+                                      },
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.attach_money_outlined,
+                                          color: Color(0xE9000000),
                                         ),
-                                      );
-                                    },
+                                        title: Text(
+                                          'Activity',
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color: Color(0xE9000000),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                        trailing: Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: Color(0xFF303030),
+                                          size: 20,
+                                        ),
+                                        tileColor: Color(0xFF80B641),
+                                        dense: false,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                10, 0, 10, 0),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.95,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF80B641),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0x39000000),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Color(0xFF80B641),
+                                        width: 4,
+                                      ),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await launchURL(
+                                            'http://www.google.com/calendar/event?action=TEMPLATE&dates=${dateTimeFormat('MMMMEEEEd', widget.prof.createdTime)}');
+                                      },
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.moped,
+                                          color: Color(0xE9000000),
+                                        ),
+                                        title: Text(
+                                          'Job Templates',
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color: Color(0xE9000000),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                        trailing: Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: Color(0xFF303030),
+                                          size: 20,
+                                        ),
+                                        tileColor: Color(0xFF5C0C0C),
+                                        dense: false,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                10, 0, 10, 0),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.95,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF80B641),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0x39000000),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                     child: ListTile(
-                                      leading: Icon(
-                                        Icons.attach_money_outlined,
+                                      leading: FaIcon(
+                                        FontAwesomeIcons.stickyNote,
                                         color: Color(0xE9000000),
                                       ),
                                       title: Text(
-                                        'Activity',
-                                        style: FlutterFlowTheme.title3.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xE9000000),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal,
-                                        ),
+                                        'Notes',
+                                        style: FlutterFlowTheme.of(context)
+                                            .title3
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xE9000000),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.normal,
+                                            ),
                                       ),
                                       trailing: Icon(
                                         Icons.arrow_forward_ios,
@@ -570,108 +737,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                           EdgeInsetsDirectional.fromSTEB(
                                               10, 0, 10, 0),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.95,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFBCD9B1),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        color: Color(0x39000000),
-                                        offset: Offset(0, 2),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await launchURL(
-                                          'http://www.google.com/calendar/event?action=TEMPLATE&dates=${dateTimeFormat('MMMMEEEEd', widget.prof.createdTime)}');
-                                    },
-                                    child: ListTile(
-                                      leading: Icon(
-                                        Icons.moped,
-                                        color: Color(0xE9000000),
-                                      ),
-                                      title: Text(
-                                        'Job Templates',
-                                        style: FlutterFlowTheme.title3.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xE9000000),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      trailing: Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: Color(0xFF303030),
-                                        size: 20,
-                                      ),
-                                      tileColor: Color(0xFF5C0C0C),
-                                      dense: false,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              10, 0, 10, 0),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.95,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFBCD9B1),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        color: Color(0x39000000),
-                                        offset: Offset(0, 2),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: ListTile(
-                                    leading: FaIcon(
-                                      FontAwesomeIcons.stickyNote,
-                                      color: Color(0xE9000000),
-                                    ),
-                                    title: Text(
-                                      'Notes',
-                                      style: FlutterFlowTheme.title3.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xE9000000),
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    trailing: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: Color(0xFF303030),
-                                      size: 20,
-                                    ),
-                                    tileColor: Color(0xFF5C0C0C),
-                                    dense: false,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            10, 0, 10, 0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
                                     ),
                                   ),
                                 ),
