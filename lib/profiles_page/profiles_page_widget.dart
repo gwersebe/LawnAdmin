@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../create_profile_page/create_profile_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -104,8 +105,9 @@ class _ProfilesPageWidgetState extends State<ProfilesPageWidget> {
                       Expanded(
                         child: StreamBuilder<List<ProfilesRecord>>(
                           stream: queryProfilesRecord(
-                            queryBuilder: (profilesRecord) =>
-                                profilesRecord.orderBy('firstName'),
+                            queryBuilder: (profilesRecord) => profilesRecord
+                                .where('Owner', isEqualTo: currentUserUid)
+                                .orderBy('firstName'),
                           ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.

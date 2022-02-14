@@ -24,7 +24,7 @@ class CreateInvoicePageWidget extends StatefulWidget {
 }
 
 class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
-  DateTime datePicked;
+  DateTime datePicked1;
   String choiceChipsValue;
   TextEditingController textController1;
   TextEditingController textController2;
@@ -34,6 +34,7 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
+  DateTime datePicked2;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -839,6 +840,28 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                   ],
                                 ),
                               ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 7, 0, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await DatePicker.showDatePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      onConfirm: (date) {
+                                        setState(() => datePicked1 = date);
+                                      },
+                                      currentTime: getCurrentTimestamp,
+                                      minTime: DateTime(0, 0, 0),
+                                    );
+                                  },
+                                  child: Text(
+                                    dateTimeFormat('M/d h:mm a', datePicked2),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                ),
+                              ),
                               Align(
                                 alignment: AlignmentDirectional(0.95, 0),
                                 child: Padding(
@@ -850,7 +873,7 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                         context,
                                         showTitleActions: true,
                                         onConfirm: (date) {
-                                          setState(() => datePicked = date);
+                                          setState(() => datePicked2 = date);
                                         },
                                         currentTime: getCurrentTimestamp,
                                         minTime: DateTime(0, 0, 0),
@@ -861,7 +884,7 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                         profileUID: widget.profile.uid,
                                         fullName:
                                             '${widget.profile.firstName} ${widget.profile.lastName}',
-                                        createdTime: datePicked,
+                                        createdTime: datePicked1,
                                         serviceName1: textController1.text,
                                         serviceName2: textController3.text,
                                         serviceName3: textController5.text,

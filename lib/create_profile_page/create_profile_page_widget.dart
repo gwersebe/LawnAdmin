@@ -784,6 +784,8 @@ class _CreateProfilePageWidgetState extends State<CreateProfilePageWidget> {
                                       propertyAddress1: textController6.text,
                                       propertyAddress2: textController7.text,
                                       propertyAddress3: textController8.text,
+                                      phone2: textController4.text,
+                                      owner: currentUserUid,
                                     );
                                     await ProfilesRecord.collection
                                         .doc()
