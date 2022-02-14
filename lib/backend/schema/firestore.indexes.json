@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "Profiles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Owner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "firstName",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "Invoices",
       "queryScope": "COLLECTION",
       "fields": [
