@@ -12,9 +12,6 @@ abstract class InvoicesRecord
       _$invoicesRecordSerializer;
 
   @nullable
-  int get profileUID;
-
-  @nullable
   DocumentReference get profile;
 
   @nullable
@@ -53,11 +50,13 @@ abstract class InvoicesRecord
   int get serviceCost4;
 
   @nullable
+  String get profileUID;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(InvoicesRecordBuilder builder) => builder
-    ..profileUID = 0
     ..fullName = ''
     ..serviceName1 = ''
     ..serviceName2 = ''
@@ -67,7 +66,8 @@ abstract class InvoicesRecord
     ..serviceCost1 = 0
     ..serviceCost2 = 0
     ..serviceCost3 = 0
-    ..serviceCost4 = 0;
+    ..serviceCost4 = 0
+    ..profileUID = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Invoices');
@@ -91,7 +91,6 @@ abstract class InvoicesRecord
 }
 
 Map<String, dynamic> createInvoicesRecordData({
-  int profileUID,
   DocumentReference profile,
   String fullName,
   DateTime createdTime,
@@ -104,11 +103,11 @@ Map<String, dynamic> createInvoicesRecordData({
   int serviceCost2,
   int serviceCost3,
   int serviceCost4,
+  String profileUID,
 }) =>
     serializers.toFirestore(
         InvoicesRecord.serializer,
         InvoicesRecord((i) => i
-          ..profileUID = profileUID
           ..profile = profile
           ..fullName = fullName
           ..createdTime = createdTime
@@ -120,4 +119,5 @@ Map<String, dynamic> createInvoicesRecordData({
           ..serviceCost1 = serviceCost1
           ..serviceCost2 = serviceCost2
           ..serviceCost3 = serviceCost3
-          ..serviceCost4 = serviceCost4));
+          ..serviceCost4 = serviceCost4
+          ..profileUID = profileUID));

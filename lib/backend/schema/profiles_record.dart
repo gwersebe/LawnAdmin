@@ -28,9 +28,6 @@ abstract class ProfilesRecord
   String get phoneNumber;
 
   @nullable
-  int get uid;
-
-  @nullable
   String get propertyAddress1;
 
   @nullable
@@ -50,6 +47,9 @@ abstract class ProfilesRecord
   String get owner;
 
   @nullable
+  String get uid;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -58,13 +58,13 @@ abstract class ProfilesRecord
     ..lastName = ''
     ..email = ''
     ..phoneNumber = ''
-    ..uid = 0
     ..propertyAddress1 = ''
     ..propertyAddress2 = ''
     ..propertyAddress3 = ''
     ..phone2 = ''
     ..notes = ''
-    ..owner = '';
+    ..owner = ''
+    ..uid = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Profiles');
@@ -93,13 +93,13 @@ Map<String, dynamic> createProfilesRecordData({
   String email,
   DateTime createdTime,
   String phoneNumber,
-  int uid,
   String propertyAddress1,
   String propertyAddress2,
   String propertyAddress3,
   String phone2,
   String notes,
   String owner,
+  String uid,
 }) =>
     serializers.toFirestore(
         ProfilesRecord.serializer,
@@ -109,10 +109,10 @@ Map<String, dynamic> createProfilesRecordData({
           ..email = email
           ..createdTime = createdTime
           ..phoneNumber = phoneNumber
-          ..uid = uid
           ..propertyAddress1 = propertyAddress1
           ..propertyAddress2 = propertyAddress2
           ..propertyAddress3 = propertyAddress3
           ..phone2 = phone2
           ..notes = notes
-          ..owner = owner));
+          ..owner = owner
+          ..uid = uid));

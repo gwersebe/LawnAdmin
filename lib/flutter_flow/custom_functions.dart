@@ -9,8 +9,8 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-int generateUID() {
+String generateUID() {
   // generate a unique id
   int timestamp = new DateTime.now().millisecondsSinceEpoch;
-  return timestamp;
+  return timestamp.toString();
 }
