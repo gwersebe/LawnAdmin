@@ -24,7 +24,7 @@ class CreateInvoicePageWidget extends StatefulWidget {
 }
 
 class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
-  DateTime datePicked1;
+  DateTime datePicked;
   String choiceChipsValue;
   TextEditingController textController1;
   TextEditingController textController2;
@@ -34,7 +34,7 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
-  DateTime datePicked2;
+  bool switchListTileValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -849,18 +849,32 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                       context,
                                       showTitleActions: true,
                                       onConfirm: (date) {
-                                        setState(() => datePicked1 = date);
+                                        setState(() => datePicked = date);
                                       },
                                       currentTime: getCurrentTimestamp,
                                       minTime: DateTime(0, 0, 0),
                                     );
                                   },
                                   child: Text(
-                                    dateTimeFormat('M/d h:mm a', datePicked2),
+                                    dateTimeFormat(
+                                        'M/d h:mm a', getCurrentTimestamp),
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
+                              ),
+                              SwitchListTile(
+                                value: switchListTileValue ??= false,
+                                onChanged: (newValue) => setState(
+                                    () => switchListTileValue = newValue),
+                                title: Text(
+                                  'Add To Calendar',
+                                  style: FlutterFlowTheme.of(context).title3,
+                                ),
+                                tileColor: Color(0xFFF5F5F5),
+                                dense: false,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.95, 0),
@@ -869,22 +883,12 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                       0, 16, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      await DatePicker.showDateTimePicker(
-                                        context,
-                                        showTitleActions: true,
-                                        onConfirm: (date) {
-                                          setState(() => datePicked2 = date);
-                                        },
-                                        currentTime: getCurrentTimestamp,
-                                        minTime: DateTime(0, 0, 0),
-                                      );
-
                                       final invoicesCreateData =
                                           createInvoicesRecordData(
                                         profileUID: widget.profile.uid,
                                         fullName:
                                             '${widget.profile.firstName} ${widget.profile.lastName}',
-                                        createdTime: datePicked1,
+                                        createdTime: datePicked,
                                         serviceName1: textController1.text,
                                         serviceName2: textController3.text,
                                         serviceName3: textController5.text,
@@ -903,6 +907,10 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                           .doc()
                                           .set(invoicesCreateData);
                                       Navigator.pop(context);
+                                      if (switchListTileValue) {
+                                        await launchURL(
+                                            'https://www.google.com/calendar/render?action=TEMPLATE&text=${widget.profile.firstName}\'s Job&details=${textController1.text}%0A${textController3.text}%0A${textController5.text}%0A${textController7.text}&location=${widget.profile.propertyAddress1}&dates=${dateTimeFormat('d/M h:mm a', datePicked)}%2Fundefined');
+                                      }
                                     },
                                     text: 'Continue',
                                     options: FFButtonOptions(
