@@ -1,4 +1,5 @@
 import '../backend/backend.dart';
+import '../create_invoice_page/create_invoice_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -119,7 +120,29 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                 ),
               ],
             ),
-            actions: [],
+            actions: [
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateInvoicePageWidget(
+                        profile: widget.prof,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
             centerTitle: true,
             elevation: 4,
           ),

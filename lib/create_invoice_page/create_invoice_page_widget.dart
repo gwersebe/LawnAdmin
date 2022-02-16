@@ -842,25 +842,66 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 7, 0, 0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    await DatePicker.showDatePicker(
-                                      context,
-                                      showTitleActions: true,
-                                      onConfirm: (date) {
-                                        setState(() => datePicked = date);
-                                      },
-                                      currentTime: getCurrentTimestamp,
-                                      minTime: DateTime(0, 0, 0),
-                                    );
-                                  },
-                                  child: Text(
-                                    dateTimeFormat(
-                                        'M/d h:mm a', getCurrentTimestamp),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
+                                    EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        elevation: 2,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                        ),
+                                        child: Container(
+                                          width: 330,
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                            border: Border.all(
+                                              color: Color(0xFFE6E6E6),
+                                            ),
+                                          ),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              await DatePicker.showDatePicker(
+                                                context,
+                                                showTitleActions: true,
+                                                onConfirm: (date) {
+                                                  setState(
+                                                      () => datePicked = date);
+                                                },
+                                                currentTime:
+                                                    getCurrentTimestamp,
+                                                minTime: DateTime(0, 0, 0),
+                                              );
+                                            },
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  'Choose Date',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
+                                                Text(
+                                                  dateTimeFormat(
+                                                      'M/d h:mm a', datePicked),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               SwitchListTile(
@@ -883,34 +924,33 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                       0, 16, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      final invoicesCreateData =
-                                          createInvoicesRecordData(
-                                        profileUID: widget.profile.uid,
-                                        fullName:
-                                            '${widget.profile.firstName} ${widget.profile.lastName}',
-                                        createdTime: datePicked,
-                                        serviceName1: textController1.text,
-                                        serviceName2: textController3.text,
-                                        serviceName3: textController5.text,
-                                        serviceName4: textController7.text,
-                                        serviceCost1:
-                                            int.parse(textController2.text),
-                                        serviceCost2:
-                                            int.parse(textController4.text),
-                                        serviceCost3:
-                                            int.parse(textController6.text),
-                                        serviceCost4:
-                                            int.parse(textController8.text),
-                                        serviceType: choiceChipsValue,
-                                      );
-                                      await InvoicesRecord.collection
-                                          .doc()
-                                          .set(invoicesCreateData);
-                                      Navigator.pop(context);
                                       if (switchListTileValue) {
-                                        await launchURL(
-                                            'https://www.google.com/calendar/render?action=TEMPLATE&text=${widget.profile.firstName}\'s Job&details=${textController1.text}%0A${textController3.text}%0A${textController5.text}%0A${textController7.text}&location=${widget.profile.propertyAddress1}&dates=${dateTimeFormat('d/M h:mm a', datePicked)}%2Fundefined');
+                                        final invoicesCreateData =
+                                            createInvoicesRecordData(
+                                          fullName:
+                                              '${widget.profile.firstName} ${widget.profile.lastName}',
+                                          serviceName1: textController1.text,
+                                          serviceName2: textController3.text,
+                                          serviceName3: textController5.text,
+                                          serviceName4: textController7.text,
+                                          serviceType: choiceChipsValue,
+                                          serviceCost1:
+                                              int.parse(textController2.text),
+                                          serviceCost2:
+                                              int.parse(textController4.text),
+                                          serviceCost3:
+                                              int.parse(textController6.text),
+                                          serviceCost4:
+                                              int.parse(textController8.text),
+                                          profile: widget.profile.reference,
+                                          profileUID: widget.profile.uid,
+                                          createdTime: datePicked,
+                                        );
+                                        await InvoicesRecord.collection
+                                            .doc()
+                                            .set(invoicesCreateData);
                                       }
+                                      Navigator.pop(context);
                                     },
                                     text: 'Continue',
                                     options: FFButtonOptions(

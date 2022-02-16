@@ -1,5 +1,4 @@
 import '../backend/backend.dart';
-import '../create_invoice_page/create_invoice_page_widget.dart';
 import '../edit_invoice_page/edit_invoice_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -71,30 +70,7 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
                     fontSize: 20,
                   ),
             ),
-            actions: [
-              FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30,
-                borderWidth: 1,
-                buttonSize: 60,
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.black,
-                  size: 30,
-                ),
-                onPressed: () async {
-                  await Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreateInvoicePageWidget(
-                        profile: widget.uid,
-                      ),
-                    ),
-                    (r) => false,
-                  );
-                },
-              ),
-            ],
+            actions: [],
             centerTitle: true,
             elevation: 4,
           ),
