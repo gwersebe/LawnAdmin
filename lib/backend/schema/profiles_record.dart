@@ -50,9 +50,6 @@ abstract class ProfilesRecord
   String get uid;
 
   @nullable
-  bool get finalized;
-
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -67,8 +64,7 @@ abstract class ProfilesRecord
     ..phone2 = ''
     ..notes = ''
     ..owner = ''
-    ..uid = ''
-    ..finalized = false;
+    ..uid = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Profiles');
@@ -104,7 +100,6 @@ Map<String, dynamic> createProfilesRecordData({
   String notes,
   String owner,
   String uid,
-  bool finalized,
 }) =>
     serializers.toFirestore(
         ProfilesRecord.serializer,
@@ -120,5 +115,4 @@ Map<String, dynamic> createProfilesRecordData({
           ..phone2 = phone2
           ..notes = notes
           ..owner = owner
-          ..uid = uid
-          ..finalized = finalized));
+          ..uid = uid));

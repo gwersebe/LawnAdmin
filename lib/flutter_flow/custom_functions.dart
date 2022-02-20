@@ -14,3 +14,13 @@ String generateUID() {
   int timestamp = new DateTime.now().millisecondsSinceEpoch;
   return timestamp.toString();
 }
+
+String convertDate(DateTime input) {
+  // convert date to string
+  return DateFormat('yyyyMMdd').format(input);
+}
+
+String convertSecondDate(DateTime date) {
+  var newDate = new DateTime(date.year, date.month, date.day + 1);
+  return DateFormat('yyyyMMdd').format(newDate);
+}

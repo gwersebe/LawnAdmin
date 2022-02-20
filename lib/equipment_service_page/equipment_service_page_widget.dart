@@ -1,35 +1,34 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../view_invoice_page/view_invoice_page_widget.dart';
+import '../view_service_page/view_service_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileinvoicesPageWidget extends StatefulWidget {
-  const ProfileinvoicesPageWidget({
+class EquipmentServicePageWidget extends StatefulWidget {
+  const EquipmentServicePageWidget({
     Key key,
     this.uid,
   }) : super(key: key);
 
-  final ProfilesRecord uid;
+  final EquipmentRecord uid;
 
   @override
-  _ProfileinvoicesPageWidgetState createState() =>
-      _ProfileinvoicesPageWidgetState();
+  _EquipmentServicePageWidgetState createState() =>
+      _EquipmentServicePageWidgetState();
 }
 
-class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
+class _EquipmentServicePageWidgetState
+    extends State<EquipmentServicePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<InvoicesRecord>>(
       stream: queryInvoicesRecord(
-        queryBuilder: (invoicesRecord) => invoicesRecord
-            .where('Owner', isEqualTo: currentUserUid)
-            .orderBy('created_time'),
+        queryBuilder: (invoicesRecord) =>
+            invoicesRecord.orderBy('created_time'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -44,7 +43,7 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
             ),
           );
         }
-        List<InvoicesRecord> profileinvoicesPageInvoicesRecordList =
+        List<InvoicesRecord> equipmentServicePageInvoicesRecordList =
             snapshot.data;
         return Scaffold(
           key: scaffoldKey,
@@ -66,7 +65,7 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
               },
             ),
             title: Text(
-              'Invoices',
+              'Serivce History',
               style: FlutterFlowTheme.of(context).bodyText1.override(
                     fontFamily: 'Lexend Deca',
                     fontSize: 20,
@@ -88,12 +87,12 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: StreamBuilder<List<InvoicesRecord>>(
-                            stream: queryInvoicesRecord(
-                              queryBuilder: (invoicesRecord) => invoicesRecord
-                                  .where('profileUID',
+                          child: StreamBuilder<List<ServicesRecord>>(
+                            stream: queryServicesRecord(
+                              queryBuilder: (servicesRecord) => servicesRecord
+                                  .where('equipmentUID',
                                       isEqualTo: widget.uid.uid)
-                                  .orderBy('created_time'),
+                                  .orderBy('lastServiceDate'),
                             ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
@@ -109,15 +108,15 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
                                   ),
                                 );
                               }
-                              List<InvoicesRecord> columnInvoicesRecordList =
+                              List<ServicesRecord> columnServicesRecordList =
                                   snapshot.data;
                               return Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: List.generate(
-                                    columnInvoicesRecordList.length,
+                                    columnServicesRecordList.length,
                                     (columnIndex) {
-                                  final columnInvoicesRecord =
-                                      columnInvoicesRecordList[columnIndex];
+                                  final columnServicesRecord =
+                                      columnServicesRecordList[columnIndex];
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 0, 10),
@@ -148,10 +147,7 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ViewInvoicePageWidget(
-                                                  invoiceRecord:
-                                                      columnInvoicesRecord,
-                                                ),
+                                                    ViewServicePageWidget(),
                                               ),
                                             );
                                           },
@@ -162,7 +158,7 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
                                               size: 25,
                                             ),
                                             title: Text(
-                                              columnInvoicesRecord.fullName,
+                                              columnServicesRecord.serviceType,
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .title3
@@ -172,17 +168,6 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
                                                     fontSize: 20,
                                                     fontWeight:
                                                         FontWeight.normal,
-                                                  ),
-                                            ),
-                                            subtitle: Text(
-                                              'Add price ',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Color(0xFF040404),
-                                                    fontWeight: FontWeight.w500,
                                                   ),
                                             ),
                                             trailing: Icon(

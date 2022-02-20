@@ -1,6 +1,8 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../view_invoice_page/view_invoice_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -72,8 +74,9 @@ class _InvoicesPageWidgetState extends State<InvoicesPageWidget> {
                       Expanded(
                         child: StreamBuilder<List<InvoicesRecord>>(
                           stream: queryInvoicesRecord(
-                            queryBuilder: (invoicesRecord) =>
-                                invoicesRecord.orderBy('created_time'),
+                            queryBuilder: (invoicesRecord) => invoicesRecord
+                                .where('Owner', isEqualTo: currentUserUid)
+                                .orderBy('created_time'),
                           ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
@@ -120,45 +123,59 @@ class _InvoicesPageWidgetState extends State<InvoicesPageWidget> {
                                         ],
                                         borderRadius: BorderRadius.circular(20),
                                       ),
-                                      child: ListTile(
-                                        leading: Icon(
-                                          Icons.attach_money_sharp,
-                                          color: Color(0xE9000000),
-                                          size: 25,
-                                        ),
-                                        title: Text(
-                                          columnInvoicesRecord.fullName,
-                                          style: FlutterFlowTheme.of(context)
-                                              .title3
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Color(0xE9000000),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.normal,
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ViewInvoicePageWidget(
+                                                invoiceRecord:
+                                                    columnInvoicesRecord,
                                               ),
-                                        ),
-                                        subtitle: Text(
-                                          'Add price ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle2
-                                              .override(
-                                                fontFamily: 'Lexend Deca',
-                                                color: Color(0xFF040404),
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                        trailing: Icon(
-                                          Icons.arrow_forward_ios,
-                                          color: Color(0xFF303030),
-                                          size: 20,
-                                        ),
-                                        dense: false,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                10, 0, 10, 0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                            ),
+                                          );
+                                        },
+                                        child: ListTile(
+                                          leading: Icon(
+                                            Icons.attach_money_sharp,
+                                            color: Color(0xE9000000),
+                                            size: 25,
+                                          ),
+                                          title: Text(
+                                            columnInvoicesRecord.fullName,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xE9000000),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                          subtitle: Text(
+                                            'Add price ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF040404),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          trailing: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Color(0xFF303030),
+                                            size: 20,
+                                          ),
+                                          dense: false,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10, 0, 10, 0),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
                                         ),
                                       ),
                                     ),

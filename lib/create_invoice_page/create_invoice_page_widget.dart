@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -890,7 +891,7 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                                 ),
                                                 Text(
                                                   dateTimeFormat(
-                                                      'M/d h:mm a', datePicked),
+                                                      'yMd', datePicked),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
@@ -924,31 +925,32 @@ class _CreateInvoicePageWidgetState extends State<CreateInvoicePageWidget> {
                                       0, 16, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      final invoicesCreateData =
+                                          createInvoicesRecordData(
+                                        fullName:
+                                            '${widget.profile.firstName} ${widget.profile.lastName}',
+                                        serviceName1: textController1.text,
+                                        serviceName2: textController3.text,
+                                        serviceName3: textController5.text,
+                                        serviceName4: textController7.text,
+                                        serviceType: choiceChipsValue,
+                                        serviceCost1: textController2.text,
+                                        serviceCost2: textController4.text,
+                                        serviceCost3: textController6.text,
+                                        serviceCost4: textController8.text,
+                                        profile: widget.profile.reference,
+                                        profileUID: widget.profile.uid,
+                                        createdTime: datePicked,
+                                        owner: currentUserUid,
+                                        isSent: false,
+                                        invoiceUID: functions.generateUID(),
+                                      );
+                                      await InvoicesRecord.collection
+                                          .doc()
+                                          .set(invoicesCreateData);
                                       if (switchListTileValue) {
-                                        final invoicesCreateData =
-                                            createInvoicesRecordData(
-                                          fullName:
-                                              '${widget.profile.firstName} ${widget.profile.lastName}',
-                                          serviceName1: textController1.text,
-                                          serviceName2: textController3.text,
-                                          serviceName3: textController5.text,
-                                          serviceName4: textController7.text,
-                                          serviceType: choiceChipsValue,
-                                          serviceCost1:
-                                              int.parse(textController2.text),
-                                          serviceCost2:
-                                              int.parse(textController4.text),
-                                          serviceCost3:
-                                              int.parse(textController6.text),
-                                          serviceCost4:
-                                              int.parse(textController8.text),
-                                          profile: widget.profile.reference,
-                                          profileUID: widget.profile.uid,
-                                          createdTime: datePicked,
-                                        );
-                                        await InvoicesRecord.collection
-                                            .doc()
-                                            .set(invoicesCreateData);
+                                        await launchURL(
+                                            'https://www.google.com/calendar/render?action=TEMPLATE&text=${widget.profile.firstName} ${widget.profile.lastName}\'s job&details=${'${textController1.text}%0A'}${'${textController3.text}%0A'}${'${textController5.text}%0A'}${'${textController7.text}%0A'}&location=${widget.profile.propertyAddress1}&dates=${functions.convertDate(datePicked)}/${functions.convertSecondDate(datePicked)}');
                                       }
                                       Navigator.pop(context);
                                     },
