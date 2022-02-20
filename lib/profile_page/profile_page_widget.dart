@@ -1,8 +1,10 @@
 import '../backend/backend.dart';
+import '../create_invoice_page/create_invoice_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../profileinvoices_page/profileinvoices_page_widget.dart';
+import '../test/test_widget.dart';
 import '../view_profile_page/view_profile_page_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +61,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: Color(0xFF1D5796),
+            backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
             automaticallyImplyLeading: true,
             leading: FlutterFlowIconButton(
               borderColor: Colors.transparent,
@@ -119,7 +121,29 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                 ),
               ],
             ),
-            actions: [],
+            actions: [
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateInvoicePageWidget(
+                        profile: widget.prof,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
             centerTitle: true,
             elevation: 4,
           ),
@@ -297,103 +321,120 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.13,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFF26313B),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 10,
-                                        color: Color(0x3B000000),
-                                        offset: Offset(0, 2),
-                                        spreadRadius: 5,
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4, 4, 4, 4),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.phone_rounded,
-                                          color: Color(0xFF1E2429),
-                                          size: 40,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 8, 0, 0),
-                                          child: Text(
-                                            'Phone',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Lexend Deca',
-                                                  color: Color(0xFF090F13),
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                          ),
-                                        ),
+                                InkWell(
+                                  onTap: () async {
+                                    await launchURL(
+                                        'tel:${profilePageProfilesRecord.phoneNumber}');
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.13,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .tertiaryColor,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 10,
+                                          color: Color(0x3B000000),
+                                          offset: Offset(0, 2),
+                                          spreadRadius: 5,
+                                        )
                                       ],
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          4, 4, 4, 4),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.phone_rounded,
+                                            color: Color(0xFF1E2429),
+                                            size: 40,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 8, 0, 0),
+                                            child: Text(
+                                              'Phone',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF090F13),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.13,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFFFFFFE),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 10,
-                                        color: Color(0x3A000000),
-                                        offset: Offset(0, 2),
-                                        spreadRadius: 5,
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4, 4, 4, 4),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.email,
-                                          color: Color(0xFF1E2429),
-                                          size: 40,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 8, 0, 0),
-                                          child: Text(
-                                            'Email',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Lexend Deca',
-                                                  color: Color(0xFF090F13),
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                          ),
-                                        ),
+                                InkWell(
+                                  onTap: () async {
+                                    await launchURL(
+                                        'mailto:${profilePageProfilesRecord.email}');
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.13,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFFFFFFE),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 10,
+                                          color: Color(0x3A000000),
+                                          offset: Offset(0, 2),
+                                          spreadRadius: 5,
+                                        )
                                       ],
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          4, 4, 4, 4),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.email,
+                                            color: Color(0xFF1E2429),
+                                            size: 40,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 8, 0, 0),
+                                            child: Text(
+                                              'Email',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: Color(0xFF090F13),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -422,35 +463,45 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           4, 4, 4, 4),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.location_pin,
-                                            color: Color(0xFF1E2429),
-                                            size: 40,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 8, 0, 0),
-                                            child: Text(
-                                              'Location',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Color(0xFF090F13),
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TestWidget(),
                                             ),
-                                          ),
-                                        ],
+                                          );
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.location_pin,
+                                              color: Color(0xFF1E2429),
+                                              size: 40,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 8, 0, 0),
+                                              child: Text(
+                                                'Location',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color: Color(0xFF090F13),
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

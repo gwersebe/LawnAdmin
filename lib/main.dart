@@ -11,6 +11,7 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'profiles_page/profiles_page_widget.dart';
 import 'invoices_page/invoices_page_widget.dart';
+import 'equipment_page/equipment_page_widget.dart';
 import 'settings/settings_widget.dart';
 
 void main() async {
@@ -63,15 +64,14 @@ class _MyAppState extends State<MyApp> {
       locale: _locale,
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
-          ? Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(
-                  color: FlutterFlowTheme.of(context).primaryColor,
+          ? Container(
+              color: Colors.transparent,
+              child: Builder(
+                builder: (context) => Image.asset(
+                  'assets/images/img_560450.png',
+                  fit: BoxFit.contain,
                 ),
               ),
             )
@@ -106,6 +106,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'profilesPage': ProfilesPageWidget(),
       'invoicesPage': InvoicesPageWidget(),
+      'equipmentPage': EquipmentPageWidget(),
       'Settings': SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
@@ -135,6 +136,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'Activity',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.agriculture,
+              size: 24,
+            ),
+            label: 'Equipment',
             tooltip: '',
           ),
           BottomNavigationBarItem(

@@ -38,19 +38,29 @@ abstract class InvoicesRecord
   String get serviceType;
 
   @nullable
-  int get serviceCost1;
-
-  @nullable
-  int get serviceCost2;
-
-  @nullable
-  int get serviceCost3;
-
-  @nullable
-  int get serviceCost4;
-
-  @nullable
   String get profileUID;
+
+  @nullable
+  String get serviceCost1;
+
+  @nullable
+  String get serviceCost2;
+
+  @nullable
+  String get serviceCost3;
+
+  @nullable
+  String get serviceCost4;
+
+  @nullable
+  @BuiltValueField(wireName: 'Owner')
+  String get owner;
+
+  @nullable
+  bool get isSent;
+
+  @nullable
+  String get invoiceUID;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -63,11 +73,14 @@ abstract class InvoicesRecord
     ..serviceName3 = ''
     ..serviceName4 = ''
     ..serviceType = ''
-    ..serviceCost1 = 0
-    ..serviceCost2 = 0
-    ..serviceCost3 = 0
-    ..serviceCost4 = 0
-    ..profileUID = '';
+    ..profileUID = ''
+    ..serviceCost1 = ''
+    ..serviceCost2 = ''
+    ..serviceCost3 = ''
+    ..serviceCost4 = ''
+    ..owner = ''
+    ..isSent = false
+    ..invoiceUID = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Invoices');
@@ -99,11 +112,14 @@ Map<String, dynamic> createInvoicesRecordData({
   String serviceName3,
   String serviceName4,
   String serviceType,
-  int serviceCost1,
-  int serviceCost2,
-  int serviceCost3,
-  int serviceCost4,
   String profileUID,
+  String serviceCost1,
+  String serviceCost2,
+  String serviceCost3,
+  String serviceCost4,
+  String owner,
+  bool isSent,
+  String invoiceUID,
 }) =>
     serializers.toFirestore(
         InvoicesRecord.serializer,
@@ -116,8 +132,11 @@ Map<String, dynamic> createInvoicesRecordData({
           ..serviceName3 = serviceName3
           ..serviceName4 = serviceName4
           ..serviceType = serviceType
+          ..profileUID = profileUID
           ..serviceCost1 = serviceCost1
           ..serviceCost2 = serviceCost2
           ..serviceCost3 = serviceCost3
           ..serviceCost4 = serviceCost4
-          ..profileUID = profileUID));
+          ..owner = owner
+          ..isSent = isSent
+          ..invoiceUID = invoiceUID));

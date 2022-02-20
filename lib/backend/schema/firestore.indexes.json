@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "Invoices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Owner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "Profiles",
       "queryScope": "COLLECTION",
       "fields": [
@@ -24,6 +38,20 @@
         },
         {
           "fieldPath": "created_time",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Services",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "equipmentUID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "lastServiceDate",
           "order": "ASCENDING"
         }
       ]
