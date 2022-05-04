@@ -1,4 +1,4 @@
-package com.gabrielwersebe.lawnadmin
+package com.gabrielwersebe.lawnadmin2
 
 import io.flutter.embedding.android.FlutterActivity
 

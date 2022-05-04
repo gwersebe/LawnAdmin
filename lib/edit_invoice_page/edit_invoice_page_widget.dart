@@ -66,7 +66,7 @@ class _EditInvoicePageWidgetState extends State<EditInvoicePageWidget> {
                 : null;
         return Scaffold(
           key: scaffoldKey,
-          backgroundColor: Color(0xFFF5F5F5),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: Form(
               key: formKey,
@@ -81,14 +81,20 @@ class _EditInvoicePageWidgetState extends State<EditInvoicePageWidget> {
                         Expanded(
                           child: Align(
                             alignment: AlignmentDirectional(-0.45, 0),
-                            child: Text(
-                              'Edit Invoice',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    fontSize: 18,
-                                  ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(5, 5, 0, 0),
+                              child: Text(
+                                'Edit Invoice',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 20,
+                                    ),
+                              ),
                             ),
                           ),
                         ),
@@ -102,35 +108,41 @@ class _EditInvoicePageWidgetState extends State<EditInvoicePageWidget> {
                               buttonSize: 60,
                               icon: Icon(
                                 Icons.close,
-                                color: Colors.black,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 size: 30,
                               ),
                               onPressed: () async {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Confirm'),
-                                      content:
-                                          Text('Close Without Saving Changes?'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () async {
-                                            Navigator.pop(alertDialogContext);
-                                            Navigator.pop(context);
-                                            ;
+                                var confirmDialogResponse =
+                                    await showDialog<bool>(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Confirm'),
+                                              content: Text(
+                                                  'Close Without Saving Changes?'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext,
+                                                          false),
+                                                  child: Text('Cancel'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext,
+                                                          true),
+                                                  child: Text('Confirm'),
+                                                ),
+                                              ],
+                                            );
                                           },
-                                          child: Text('Confirm'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                        ) ??
+                                        false;
+                                if (confirmDialogResponse) {
+                                  Navigator.pop(context);
+                                }
                               },
                             ),
                           ),
@@ -153,7 +165,10 @@ class _EditInvoicePageWidgetState extends State<EditInvoicePageWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Divider(
+                                    height: 5,
                                     thickness: 1,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -162,837 +177,774 @@ class _EditInvoicePageWidgetState extends State<EditInvoicePageWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController1 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceName1,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Type 1',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                  validator: (val) {
-                                                    if (val.isEmpty) {
-                                                      return 'Field is required';
-                                                    }
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController1 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceName1,
+                                                ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Type 1',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
 
-                                                    return null;
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController2 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceCost1,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Cost 1',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                  validator: (val) {
-                                                    if (val.isEmpty) {
-                                                      return 'Field is required';
-                                                    }
-
-                                                    return null;
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController3 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceName2,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Type 2',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController4 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceCost2,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Cost 2',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController5 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceName3,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Type 3',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController6 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceCost3,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Cost 3',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController7 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceName4,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Type 4',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: TextFormField(
-                                                  controller:
-                                                      textController8 ??=
-                                                          TextEditingController(
-                                                    text:
-                                                        editInvoicePageInvoicesRecord
-                                                            .serviceCost4,
-                                                  ),
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Service Cost 4',
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color:
-                                                            Color(0xFF8B97A2),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Container(
-                                              width: 330,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                  color: Color(0xFFE6E6E6),
-                                                ),
-                                              ),
-                                              child: InkWell(
-                                                onTap: () async {
-                                                  await DatePicker
-                                                      .showDatePicker(
-                                                    context,
-                                                    showTitleActions: true,
-                                                    onConfirm: (date) {
-                                                      setState(() =>
-                                                          datePicked = date);
-                                                    },
-                                                    currentTime:
-                                                        editInvoicePageInvoicesRecord
-                                                            .createdTime,
-                                                    minTime: DateTime(0, 0, 0),
-                                                  );
+                                                  return null;
                                                 },
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Text(
-                                                      'Choose Date',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1,
-                                                    ),
-                                                    Text(
-                                                      dateTimeFormat(
-                                                          'M/d h:mm a',
-                                                          editInvoicePageInvoicesRecord
-                                                              .createdTime),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1,
-                                                    ),
-                                                  ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController2 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceCost1,
                                                 ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Cost 1',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                validator: (val) {
+                                                  if (val.isEmpty) {
+                                                    return 'Field is required';
+                                                  }
+
+                                                  return null;
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController3 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceName2,
+                                                ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Type 2',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController4 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceCost2,
+                                                ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Cost 2',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController5 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceName3,
+                                                ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Type 3',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController6 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceCost3,
+                                                ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Cost 3',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController7 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceName4,
+                                                ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Type 4',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: TextFormField(
+                                                controller: textController8 ??=
+                                                    TextEditingController(
+                                                  text:
+                                                      editInvoicePageInvoicesRecord
+                                                          .serviceCost4,
+                                                ),
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Service Cost 4',
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(4.0),
+                                                      topRight:
+                                                          Radius.circular(4.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 330,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 1,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryColor,
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(14),
+                                            ),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                await DatePicker.showDatePicker(
+                                                  context,
+                                                  showTitleActions: true,
+                                                  onConfirm: (date) {
+                                                    setState(() =>
+                                                        datePicked = date);
+                                                  },
+                                                  currentTime:
+                                                      editInvoicePageInvoicesRecord
+                                                          .createdTime,
+                                                  minTime: DateTime(0, 0, 0),
+                                                );
+                                              },
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
+                                                    'Choose Date',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    dateTimeFormat(
+                                                        'M/d h:mm a',
+                                                        editInvoicePageInvoicesRecord
+                                                            .createdTime),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
@@ -1035,16 +987,18 @@ class _EditInvoicePageWidgetState extends State<EditInvoicePageWidget> {
                                         options: FFButtonOptions(
                                           width: 140,
                                           height: 60,
-                                          color: Color(0xFF80B641),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: Colors.white,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                          color: Color(0xFF45C87C),
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .subtitle2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiaryColor,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                           elevation: 2,
                                           borderSide: BorderSide(
                                             color: Colors.transparent,

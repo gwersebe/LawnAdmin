@@ -42,7 +42,7 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Form(
           key: formKey,
@@ -57,13 +57,19 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                     Expanded(
                       child: Align(
                         alignment: AlignmentDirectional(-0.6, 0),
-                        child: Text(
-                          'Add Equipment',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    fontSize: 18,
-                                  ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20, 5, 0, 0),
+                          child: Text(
+                            'Add Equipment',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 22,
+                                ),
+                          ),
                         ),
                       ),
                     ),
@@ -77,35 +83,36 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                           buttonSize: 60,
                           icon: Icon(
                             Icons.close,
-                            color: Colors.black,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             size: 30,
                           ),
                           onPressed: () async {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Confirm'),
-                                  content:
-                                      Text('Close Without Saving Changes?'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        Navigator.pop(alertDialogContext);
-                                        Navigator.pop(context);
-                                        ;
-                                      },
-                                      child: Text('Confirm'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Confirm'),
+                                      content:
+                                          Text('Close Without Saving Changes?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('Confirm'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              Navigator.pop(context);
+                            }
                           },
                         ),
                       ),
@@ -126,7 +133,10 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Divider(
+                                height: 5,
                                 thickness: 1,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryColor,
                               ),
                               Padding(
                                 padding:
@@ -135,71 +145,68 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Expanded(
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 2,
-                                        shape: RoundedRectangleBorder(
+                                      child: Container(
+                                        width: 330,
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 1,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                            )
+                                          ],
                                           borderRadius:
-                                              BorderRadius.circular(25),
+                                              BorderRadius.circular(10),
                                         ),
-                                        child: Container(
-                                          width: 330,
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            border: Border.all(
-                                              color: Color(0xFFE6E6E6),
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 0, 0, 0),
-                                            child: TextFormField(
-                                              controller: textController1,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Name',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
+                                          child: TextFormField(
+                                            controller: textController1,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText: 'Name',
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
                                                 ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
                                                 ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: Color(0xFF8B97A2),
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Open Sans',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                           ),
                                         ),
                                       ),
@@ -214,71 +221,68 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Expanded(
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 2,
-                                        shape: RoundedRectangleBorder(
+                                      child: Container(
+                                        width: 330,
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 1,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                            )
+                                          ],
                                           borderRadius:
-                                              BorderRadius.circular(25),
+                                              BorderRadius.circular(10),
                                         ),
-                                        child: Container(
-                                          width: 330,
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            border: Border.all(
-                                              color: Color(0xFFE6E6E6),
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 0, 0, 0),
-                                            child: TextFormField(
-                                              controller: textController2,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Cost',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
+                                          child: TextFormField(
+                                            controller: textController2,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText: 'Cost',
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
                                                 ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
                                                 ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: Color(0xFF8B97A2),
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Open Sans',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                           ),
                                         ),
                                       ),
@@ -293,71 +297,68 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Expanded(
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 2,
-                                        shape: RoundedRectangleBorder(
+                                      child: Container(
+                                        width: 330,
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 1,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                            )
+                                          ],
                                           borderRadius:
-                                              BorderRadius.circular(25),
+                                              BorderRadius.circular(10),
                                         ),
-                                        child: Container(
-                                          width: 330,
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            border: Border.all(
-                                              color: Color(0xFFE6E6E6),
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 0, 0, 0),
-                                            child: TextFormField(
-                                              controller: textController3,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Year Purchased',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
+                                          child: TextFormField(
+                                            controller: textController3,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText: 'Year Purchased',
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
                                                 ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
                                                 ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: Color(0xFF8B97A2),
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Open Sans',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                           ),
                                         ),
                                       ),
@@ -372,71 +373,68 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Expanded(
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 2,
-                                        shape: RoundedRectangleBorder(
+                                      child: Container(
+                                        width: 330,
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 1,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryColor,
+                                            )
+                                          ],
                                           borderRadius:
-                                              BorderRadius.circular(25),
+                                              BorderRadius.circular(10),
                                         ),
-                                        child: Container(
-                                          width: 330,
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            border: Border.all(
-                                              color: Color(0xFFE6E6E6),
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 0, 0, 0),
-                                            child: TextFormField(
-                                              controller: textController4,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Notes',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
+                                          child: TextFormField(
+                                            controller: textController4,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText: 'Notes',
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
                                                 ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
                                                 ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: Color(0xFF8B97A2),
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Open Sans',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                           ),
                                         ),
                                       ),
@@ -468,16 +466,16 @@ class _CreateEquipmentPageWidgetState extends State<CreateEquipmentPageWidget> {
                                     options: FFButtonOptions(
                                       width: 140,
                                       height: 60,
-                                      color: Color(0xFF80B641),
+                                      color: Color(0xFF45C87C),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Montserrat',
+                                            fontFamily: 'Open Sans',
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                      elevation: 3,
+                                      elevation: 2,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                       ),

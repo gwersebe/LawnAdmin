@@ -48,7 +48,7 @@ class _EquipmentServicePageWidgetState
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
             automaticallyImplyLeading: true,
             leading: FlutterFlowIconButton(
               borderColor: Colors.transparent,
@@ -57,7 +57,7 @@ class _EquipmentServicePageWidgetState
               buttonSize: 60,
               icon: Icon(
                 Icons.chevron_left_rounded,
-                color: Colors.black,
+                color: FlutterFlowTheme.of(context).primaryText,
                 size: 30,
               ),
               onPressed: () async {
@@ -67,134 +67,127 @@ class _EquipmentServicePageWidgetState
             title: Text(
               'Serivce History',
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Lexend Deca',
+                    fontFamily: 'Open Sans',
+                    color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 20,
                   ),
             ),
             actions: [],
             centerTitle: true,
-            elevation: 4,
+            elevation: 1,
           ),
-          backgroundColor: Color(0xFFF5F5F5),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: StreamBuilder<List<ServicesRecord>>(
-                            stream: queryServicesRecord(
-                              queryBuilder: (servicesRecord) => servicesRecord
-                                  .where('equipmentUID',
-                                      isEqualTo: widget.uid.uid)
-                                  .orderBy('lastServiceDate'),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                    child: StreamBuilder<List<ServicesRecord>>(
+                      stream: queryServicesRecord(
+                        queryBuilder: (servicesRecord) => servicesRecord
+                            .where('equipmentUID', isEqualTo: widget.uid.uid)
+                            .orderBy('lastServiceDate'),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                              ),
                             ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
+                          );
+                        }
+                        List<ServicesRecord> columnServicesRecordList =
+                            snapshot.data;
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: List.generate(
+                                columnServicesRecordList.length, (columnIndex) {
+                              final columnServicesRecord =
+                                  columnServicesRecordList[columnIndex];
+                              return Align(
+                                alignment: AlignmentDirectional(0, 0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.95,
                                     height: 50,
-                                    child: CircularProgressIndicator(
+                                    decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 0.5,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(14),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ViewServicePageWidget(),
+                                          ),
+                                        );
+                                      },
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.attach_money_sharp,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 25,
+                                        ),
+                                        title: Text(
+                                          columnServicesRecord.serviceType,
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                        trailing: Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 20,
+                                        ),
+                                        dense: false,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                10, 0, 10, 0),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                );
-                              }
-                              List<ServicesRecord> columnServicesRecordList =
-                                  snapshot.data;
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    columnServicesRecordList.length,
-                                    (columnIndex) {
-                                  final columnServicesRecord =
-                                      columnServicesRecordList[columnIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 10),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      elevation: 8,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.95,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF80B641),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0x39000000),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ViewServicePageWidget(),
-                                              ),
-                                            );
-                                          },
-                                          child: ListTile(
-                                            leading: Icon(
-                                              Icons.attach_money_sharp,
-                                              color: Color(0xE9000000),
-                                              size: 25,
-                                            ),
-                                            title: Text(
-                                              columnServicesRecord.serviceType,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title3
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Color(0xE9000000),
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                            ),
-                                            trailing: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Color(0xFF303030),
-                                              size: 20,
-                                            ),
-                                            dense: false,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 10, 0),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }),
+                                ),
                               );
-                            },
+                            }),
                           ),
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
