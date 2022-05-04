@@ -1,7 +1,6 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_equipment_page/create_equipment_page_widget.dart';
-import '../equipment_item_page/equipment_item_page_widget.dart';
+import '../create_service_page/create_service_page_widget.dart';
+import '../equipment_service_page/equipment_service_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -9,7 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EquipmentPageWidget extends StatefulWidget {
-  const EquipmentPageWidget({Key key}) : super(key: key);
+  const EquipmentPageWidget({
+    Key key,
+    this.eRecord,
+  }) : super(key: key);
+
+  final EquipmentRecord eRecord;
 
   @override
   _EquipmentPageWidgetState createState() => _EquipmentPageWidgetState();
@@ -22,167 +26,261 @@ class _EquipmentPageWidgetState extends State<EquipmentPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF5F5F5),
-      body: SafeArea(
-        child: Column(
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        automaticallyImplyLeading: true,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 0,
+          icon: Icon(
+            Icons.chevron_left,
+            color: FlutterFlowTheme.of(context).primaryText,
+            size: 37,
+          ),
+          onPressed: () async {
+            Navigator.pop(context);
+          },
+        ),
+        title: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                    child: Text(
-                      'Equipment',
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Original Cost:  ${widget.eRecord.name}',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            fontSize: 30,
+                            fontFamily: 'Open Sans',
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            fontSize: 20,
                           ),
                     ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    height: 50,
-                    decoration: BoxDecoration(),
-                    child: Align(
-                      alignment: AlignmentDirectional(0.15, 0),
-                      child: FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30,
-                        borderWidth: 1,
-                        buttonSize: 65,
-                        icon: Icon(
-                          Icons.add,
-                          color: Colors.black,
-                          size: 30,
-                        ),
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.bottomToTop,
-                              duration: Duration(milliseconds: 300),
-                              reverseDuration: Duration(milliseconds: 300),
-                              child: CreateEquipmentPageWidget(),
-                            ),
-                          );
-                        },
-                      ),
+                    Text(
+                      ' ',
+                      style: FlutterFlowTheme.of(context).bodyText1,
                     ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.add,
+              color: FlutterFlowTheme.of(context).primaryText,
+              size: 30,
+            ),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateServicePageWidget(
+                    equipment: widget.eRecord,
                   ),
-                ],
+                ),
+              );
+            },
+          ),
+        ],
+        centerTitle: true,
+        elevation: 4,
+      ),
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.92,
+                height: MediaQuery.of(context).size.height * 0.14,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 5,
+                      color: FlutterFlowTheme.of(context).secondaryColor,
+                      spreadRadius: 0.1,
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(15, 10, 0, 0),
+                          child: Text(
+                            'Year Purchased:  ${widget.eRecord.yearPurchased}',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(15, 10, 0, 0),
+                          child: Text(
+                            'Original Cost:  ${widget.eRecord.cost}',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            Divider(
-              thickness: 1,
-              color: Color(0xE9000000),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: StreamBuilder<List<EquipmentRecord>>(
-                      stream: queryEquipmentRecord(
-                        queryBuilder: (equipmentRecord) => equipmentRecord
-                            .where('Owner', isEqualTo: currentUserUid),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.72,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x39000000),
+                      offset: Offset(0, -1),
+                    )
+                  ],
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 10),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              'Quick Service',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.92,
                               height: 50,
-                              child: CircularProgressIndicator(
+                              decoration: BoxDecoration(
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(14),
                               ),
-                            ),
-                          );
-                        }
-                        List<EquipmentRecord> columnEquipmentRecordList =
-                            snapshot.data;
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: List.generate(
-                              columnEquipmentRecordList.length, (columnIndex) {
-                            final columnEquipmentRecord =
-                                columnEquipmentRecordList[columnIndex];
-                            return Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                              child: Material(
-                                color: Colors.transparent,
-                                elevation: 8,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.95,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFF80B641),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(0x39000000),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              EquipmentItemPageWidget(
-                                            prof: columnEquipmentRecord,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: ListTile(
-                                      leading: Icon(
-                                        Icons.person,
-                                        color: Color(0xE9000000),
-                                      ),
-                                      title: Text(
-                                        columnEquipmentRecord.name,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title3
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xE9000000),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                      ),
-                                      trailing: Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: Color(0xFF303030),
-                                        size: 20,
-                                      ),
-                                      dense: false,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              10, 0, 10, 0),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25),
+                              child: InkWell(
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EquipmentServicePageWidget(
+                                        uid: widget.eRecord,
                                       ),
                                     ),
+                                  );
+                                },
+                                child: ListTile(
+                                  leading: Icon(
+                                    Icons.miscellaneous_services,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                  title: Text(
+                                    'Service History',
+                                    style: FlutterFlowTheme.of(context)
+                                        .title3
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                  trailing: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 20,
+                                  ),
+                                  dense: false,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          10, 0, 10, 0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
                                   ),
                                 ),
                               ),
-                            );
-                          }),
-                        );
-                      },
-                    ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ],

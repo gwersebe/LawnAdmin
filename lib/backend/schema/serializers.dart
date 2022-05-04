@@ -4,6 +4,8 @@ import 'profiles_record.dart';
 import 'invoices_record.dart';
 import 'equipment_record.dart';
 import 'services_record.dart';
+import 'companies_record.dart';
+import 'notes_record.dart';
 
 import 'index.dart';
 
@@ -18,6 +20,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   InvoicesRecord,
   EquipmentRecord,
   ServicesRecord,
+  CompaniesRecord,
+  NotesRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

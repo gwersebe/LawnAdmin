@@ -5,18 +5,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'auth/firebase_user_provider.dart';
 
 import 'flutter_flow/flutter_flow_theme.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:lawn_admin/login/login_widget.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'profiles_page/profiles_page_widget.dart';
-import 'invoices_page/invoices_page_widget.dart';
-import 'equipment_page/equipment_page_widget.dart';
-import 'settings/settings_widget.dart';
+import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FlutterFlowTheme.initialize();
 
   runApp(MyApp());
 }
@@ -24,7 +21,7 @@ void main() async {
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>();
@@ -32,15 +29,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale _locale;
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+
   Stream<LawnAdminFirebaseUser> userStream;
   LawnAdminFirebaseUser initialUser;
   bool displaySplashImage = true;
-
-  void setLocale(Locale value) => setState(() => _locale = value);
-  void setThemeMode(ThemeMode mode) => setState(() {
-        _themeMode = mode;
-      });
 
   @override
   void initState() {
@@ -48,8 +41,16 @@ class _MyAppState extends State<MyApp> {
     userStream = lawnAdminFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
     Future.delayed(
-        Duration(seconds: 1), () => setState(() => displaySplashImage = false));
+      Duration(seconds: 1),
+      () => setState(() => displaySplashImage = false),
+    );
   }
+
+  void setLocale(Locale value) => setState(() => _locale = value);
+  void setThemeMode(ThemeMode mode) => setState(() {
+        _themeMode = mode;
+        FlutterFlowTheme.saveThemeMode(mode);
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +65,14 @@ class _MyAppState extends State<MyApp> {
       locale: _locale,
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(brightness: Brightness.light),
+      darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
           ? Container(
               color: Colors.transparent,
               child: Builder(
                 builder: (context) => Image.asset(
-                  'assets/images/img_560450.png',
+                  'assets/images/LA39.png',
                   fit: BoxFit.contain,
                 ),
               ),
@@ -93,7 +95,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'profilesPage';
+  String _currentPage = 'allProfilesPage';
 
   @override
   void initState() {
@@ -104,10 +106,10 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'profilesPage': ProfilesPageWidget(),
-      'invoicesPage': InvoicesPageWidget(),
-      'equipmentPage': EquipmentPageWidget(),
-      'Settings': SettingsWidget(),
+      'allProfilesPage': AllProfilesPageWidget(),
+      'allinvoicesPage': AllinvoicesPageWidget(),
+      'allequipmentPage': AllequipmentPageWidget(),
+      'settings1': Settings1Widget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -115,11 +117,11 @@ class _NavBarPageState extends State<NavBarPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
-        backgroundColor: Colors.white,
-        selectedItemColor: FlutterFlowTheme.of(context).primaryColor,
-        unselectedItemColor: Color(0x8A000000),
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        selectedItemColor: FlutterFlowTheme.of(context).secondaryText,
+        unselectedItemColor: FlutterFlowTheme.of(context).primaryText,
         showSelectedLabels: true,
-        showUnselectedLabels: false,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -151,7 +153,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.settings,
               size: 24,
             ),
-            label: 'Settings',
+            label: 'Home',
             tooltip: '',
           )
         ],

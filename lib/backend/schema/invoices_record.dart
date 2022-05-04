@@ -63,6 +63,13 @@ abstract class InvoicesRecord
   String get invoiceUID;
 
   @nullable
+  bool get completed;
+
+  @nullable
+  @BuiltValueField(wireName: 'InvoiceTotal')
+  int get invoiceTotal;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -80,7 +87,9 @@ abstract class InvoicesRecord
     ..serviceCost4 = ''
     ..owner = ''
     ..isSent = false
-    ..invoiceUID = '';
+    ..invoiceUID = ''
+    ..completed = false
+    ..invoiceTotal = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Invoices');
@@ -120,6 +129,8 @@ Map<String, dynamic> createInvoicesRecordData({
   String owner,
   bool isSent,
   String invoiceUID,
+  bool completed,
+  int invoiceTotal,
 }) =>
     serializers.toFirestore(
         InvoicesRecord.serializer,
@@ -139,4 +150,6 @@ Map<String, dynamic> createInvoicesRecordData({
           ..serviceCost4 = serviceCost4
           ..owner = owner
           ..isSent = isSent
-          ..invoiceUID = invoiceUID));
+          ..invoiceUID = invoiceUID
+          ..completed = completed
+          ..invoiceTotal = invoiceTotal));

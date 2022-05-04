@@ -9,13 +9,17 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "profileUID",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "created_time",
           "order": "ASCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "Profiles",
+      "collectionGroup": "Invoices",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -23,7 +27,7 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "firstName",
+          "fieldPath": "created_time",
           "order": "ASCENDING"
         }
       ]
@@ -52,6 +56,38 @@
         },
         {
           "fieldPath": "lastServiceDate",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Notes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Owner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Profiles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Owner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "active",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "firstName",
           "order": "ASCENDING"
         }
       ]

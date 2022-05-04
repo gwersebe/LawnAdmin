@@ -25,7 +25,7 @@ class _ViewServicePageWidgetState extends State<ViewServicePageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: true,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -34,7 +34,7 @@ class _ViewServicePageWidgetState extends State<ViewServicePageWidget> {
           buttonSize: 60,
           icon: Icon(
             Icons.chevron_left,
-            color: Colors.black,
+            color: FlutterFlowTheme.of(context).primaryText,
             size: 37,
           ),
           onPressed: () async {
@@ -44,7 +44,8 @@ class _ViewServicePageWidgetState extends State<ViewServicePageWidget> {
         title: Text(
           'Service Details',
           style: FlutterFlowTheme.of(context).bodyText1.override(
-                fontFamily: 'Lexend Deca',
+                fontFamily: 'Open Sans',
+                color: FlutterFlowTheme.of(context).primaryText,
                 fontSize: 18,
               ),
         ),
@@ -56,7 +57,7 @@ class _ViewServicePageWidgetState extends State<ViewServicePageWidget> {
             buttonSize: 60,
             icon: Icon(
               Icons.delete,
-              color: Colors.black,
+              color: FlutterFlowTheme.of(context).primaryText,
               size: 30,
             ),
             onPressed: () async {
@@ -66,9 +67,9 @@ class _ViewServicePageWidgetState extends State<ViewServicePageWidget> {
           ),
         ],
         centerTitle: true,
-        elevation: 4,
+        elevation: 1,
       ),
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -83,18 +84,194 @@ class _ViewServicePageWidgetState extends State<ViewServicePageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
+                      child: Container(
+                        width: 330,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Container(
+                          width: 330,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(17),
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(-0.9, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(-0.95, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Text(
+                                      'Service Date',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(-0.95, 0),
+                                  child: Text(
+                                    dateTimeFormat('yMd',
+                                        widget.serviceRecord.lastServiceDate),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 20,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: 330,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(-0.9, 0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(-0.95, 0),
+                                  child: Text(
+                                    'Service Type',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(-0.95, 0),
+                                  child: Text(
+                                    widget.serviceRecord.serviceType,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title3
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: 330,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(-0.9, 0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(-0.95, 0),
+                                  child: Text(
+                                    'Service Cost',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(-0.95, 0),
+                                  child: Text(
+                                    widget.serviceRecord.serviceCost,
+                                    style: FlutterFlowTheme.of(context)
+                                        .title3
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: 330,
+                        height: 60,
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Container(
                           width: 330,
                           height: 60,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(17),
                           ),
                           child: Align(
                             alignment: AlignmentDirectional(-0.9, 0),
@@ -105,244 +282,34 @@ class _ViewServicePageWidgetState extends State<ViewServicePageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(-0.9, 0),
+                                    alignment: AlignmentDirectional(-0.96, 0),
                                     child: Text(
-                                      'Service Type',
-                                      textAlign: TextAlign.start,
+                                      'Notes',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2
                                           .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Color(0xFF040404),
+                                            fontFamily: 'Open Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(-0.9, 0),
+                                    alignment: AlignmentDirectional(-0.96, 0),
                                     child: Text(
-                                      widget.serviceRecord.serviceType,
+                                      widget.serviceRecord.notes,
                                       style: FlutterFlowTheme.of(context)
-                                          .title3
+                                          .bodyText1
                                           .override(
-                                            fontFamily: 'Lexend Deca',
+                                            fontFamily: 'Open Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 20,
                                           ),
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: 330,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(-0.9, 0),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Service Cost',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFF040404),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        widget.serviceRecord.serviceCost,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              fontSize: 20,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Container(
-                          width: 330,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(-0.9, 0),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Service Date',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFF040404),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        dateTimeFormat(
-                                            'yMd',
-                                            widget
-                                                .serviceRecord.lastServiceDate),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              fontSize: 20,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: 330,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            width: 330,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(-0.9, 0),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        'Notes',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFF040404),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.9, 0),
-                                      child: Text(
-                                        widget.serviceRecord.notes,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              fontSize: 20,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ),
                             ),
                           ),

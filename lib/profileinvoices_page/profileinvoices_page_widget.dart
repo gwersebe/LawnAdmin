@@ -49,7 +49,7 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
             automaticallyImplyLeading: true,
             leading: FlutterFlowIconButton(
               borderColor: Colors.transparent,
@@ -58,7 +58,7 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
               buttonSize: 60,
               icon: Icon(
                 Icons.chevron_left_rounded,
-                color: Colors.black,
+                color: FlutterFlowTheme.of(context).primaryText,
                 size: 30,
               ),
               onPressed: () async {
@@ -68,148 +68,177 @@ class _ProfileinvoicesPageWidgetState extends State<ProfileinvoicesPageWidget> {
             title: Text(
               'Invoices',
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Lexend Deca',
-                    fontSize: 20,
+                    fontFamily: 'Open Sans',
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    fontSize: 22,
                   ),
             ),
             actions: [],
             centerTitle: true,
-            elevation: 4,
+            elevation: 1,
           ),
-          backgroundColor: Color(0xFFF5F5F5),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
+            child: Stack(
               children: [
-                Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: StreamBuilder<List<InvoicesRecord>>(
-                            stream: queryInvoicesRecord(
-                              queryBuilder: (invoicesRecord) => invoicesRecord
-                                  .where('profileUID',
-                                      isEqualTo: widget.uid.uid)
-                                  .orderBy('created_time'),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                  child: StreamBuilder<List<InvoicesRecord>>(
+                    stream: queryInvoicesRecord(
+                      queryBuilder: (invoicesRecord) => invoicesRecord
+                          .where('profileUID', isEqualTo: widget.uid.uid)
+                          .orderBy('created_time'),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(
+                              color: FlutterFlowTheme.of(context).primaryColor,
                             ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: CircularProgressIndicator(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                    ),
+                          ),
+                        );
+                      }
+                      List<InvoicesRecord> columnInvoicesRecordList =
+                          snapshot.data;
+                      return SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: List.generate(
+                              columnInvoicesRecordList.length, (columnIndex) {
+                            final columnInvoicesRecord =
+                                columnInvoicesRecordList[columnIndex];
+                            return Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.95,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 1,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryColor,
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(14),
                                   ),
-                                );
-                              }
-                              List<InvoicesRecord> columnInvoicesRecordList =
-                                  snapshot.data;
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    columnInvoicesRecordList.length,
-                                    (columnIndex) {
-                                  final columnInvoicesRecord =
-                                      columnInvoicesRecordList[columnIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 10),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      elevation: 8,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.95,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF80B641),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0x39000000),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ViewInvoicePageWidget(
-                                                  invoiceRecord:
-                                                      columnInvoicesRecord,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: ListTile(
-                                            leading: Icon(
-                                              Icons.attach_money_sharp,
-                                              color: Color(0xE9000000),
-                                              size: 25,
-                                            ),
-                                            title: Text(
-                                              columnInvoicesRecord.fullName,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .title3
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Color(0xE9000000),
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                            ),
-                                            subtitle: Text(
-                                              'Add price ',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Color(0xFF040404),
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                            ),
-                                            trailing: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Color(0xFF303030),
-                                              size: 20,
-                                            ),
-                                            dense: false,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 10, 0),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
+                                  child: StreamBuilder<List<CompaniesRecord>>(
+                                    stream: queryCompaniesRecord(
+                                      queryBuilder: (companiesRecord) =>
+                                          companiesRecord.where('email',
+                                              isEqualTo: currentUserEmail),
+                                      singleRecord: true,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: CircularProgressIndicator(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
                                             ),
                                           ),
+                                        );
+                                      }
+                                      List<CompaniesRecord>
+                                          listTileCompaniesRecordList =
+                                          snapshot.data;
+                                      // Return an empty Container when the document does not exist.
+                                      if (snapshot.data.isEmpty) {
+                                        return Container();
+                                      }
+                                      final listTileCompaniesRecord =
+                                          listTileCompaniesRecordList.isNotEmpty
+                                              ? listTileCompaniesRecordList
+                                                  .first
+                                              : null;
+                                      return InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ViewInvoicePageWidget(
+                                                companyRecord:
+                                                    listTileCompaniesRecord,
+                                                invoiceUID: columnInvoicesRecord
+                                                    .invoiceUID,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: ListTile(
+                                          leading: Icon(
+                                            Icons.attach_money_sharp,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 25,
+                                          ),
+                                          title: Text(
+                                            columnInvoicesRecord.fullName,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3
+                                                .override(
+                                                  fontFamily: 'Open Sans',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                          subtitle: Text(
+                                            '\$ ${columnInvoicesRecord.invoiceTotal.toString()}',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          trailing: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 20,
+                                          ),
+                                          dense: false,
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10, 0, 10, 0),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                }),
-                              );
-                            },
-                          ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
                         ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ],
